@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"short_url.com/internal/service"
 )
@@ -16,18 +18,32 @@ type URLHandler interface {
 
 func (h *Handler) GetShortenedURL(c *gin.Context) {
 
-	_, err := h.urlService.Shorten("")
+	req := &GetShortenedURLRequest{}
+
+	err := c.BindJSON(req)
 	if err != nil {
 		return
 	}
+	fmt.Println(req.OrignalURL)
+
+	shortURL, err := h.urlService.Shorten(req.OrignalURL)
+	if err != nil {
+		return
+	}
+	c.JSON(200, &GetShortenedURLResponse{
+		ShortURL: shortURL,
+	})
 
 }
 
 func (h *Handler) GetOrignalURL(c *gin.Context) {
-	_, err := h.urlService.ResolveOrignalURL("")
+
+	orignalURL, err := h.urlService.ResolveOrignalURL(c.Param("shortURL"))
 	if err != nil {
 		return
 	}
+
+	c.Redirect(302, orignalURL)
 
 }
 
