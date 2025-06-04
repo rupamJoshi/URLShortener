@@ -3,12 +3,16 @@ package service
 import (
 	"crypto/rand"
 	"fmt"
+
 	"math/big"
+
+	"short_url.com/config"
 )
 
 var shortURLMap = make(map[string]ShortURL)
 
 type URLShortenerService struct {
+	config *config.Config
 }
 
 type URLShortener interface {
@@ -35,15 +39,14 @@ func generateRandomString() (string, error) {
 
 func (u *URLShortenerService) Shorten(orignalURL string) (string, error) {
 
-	shortURL, err := generateRandomString()
+	short, err := generateRandomString()
 	if err != nil {
 		return "", err
 	}
 
-	fmt.Println("Shorten", orignalURL)
-
-	shortURLMap[shortURL] = ShortURL{
-		ID:           shortURL,
+	shortURL := fmt.Sprintf("%s://%s:%s/%s", u.config.Schema, u.config.Host, u.config.Port, short)
+	shortURLMap[short] = ShortURL{
+		ID:           short,
 		ShortURL:     shortURL,
 		OrignalURL:   orignalURL,
 		ResolveCount: 0,
@@ -58,8 +61,6 @@ func (u *URLShortenerService) ResolveOrignalURL(shortURL string) (string, error)
 
 	orignalURL := s.OrignalURL
 
-	fmt.Printf("Resolve %s, %+v %+v", orignalURL, s, shortURLMap)
-
 	s.ResolveCount = s.ResolveCount + 1
 
 	shortURLMap[shortURL] = s
@@ -67,7 +68,9 @@ func (u *URLShortenerService) ResolveOrignalURL(shortURL string) (string, error)
 	return orignalURL, nil
 }
 
-func NewURLService() URLShortener {
+func NewURLService(config *config.Config) URLShortener {
 
-	return &URLShortenerService{}
+	return &URLShortenerService{
+		config: config,
+	}
 }

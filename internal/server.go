@@ -2,6 +2,7 @@ package internal
 
 import (
 	"short_url.com/api"
+	"short_url.com/config"
 	"short_url.com/internal/service"
 )
 
@@ -11,7 +12,8 @@ type Server struct {
 }
 
 func InitServer() Server {
-	service := service.NewURLService()
+	config := config.NewConfig("/home/rupam/url_shortener/config/config.yaml")
+	service := service.NewURLService(config)
 	handler := api.NewURLHandler(service)
 
 	return Server{

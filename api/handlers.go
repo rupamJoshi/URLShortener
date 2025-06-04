@@ -24,7 +24,6 @@ func (h *Handler) GetShortenedURL(c *gin.Context) {
 	if err != nil {
 		return
 	}
-	fmt.Println(req.OrignalURL)
 
 	shortURL, err := h.urlService.Shorten(req.OrignalURL)
 	if err != nil {
@@ -42,7 +41,7 @@ func (h *Handler) GetOrignalURL(c *gin.Context) {
 	if err != nil {
 		return
 	}
-
+	fmt.Println(orignalURL)
 	c.Redirect(302, orignalURL)
 
 }
