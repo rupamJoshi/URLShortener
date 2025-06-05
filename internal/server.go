@@ -12,7 +12,7 @@ type Server struct {
 }
 
 func InitServer() Server {
-	config := config.NewConfig("/home/rupam/url_shortener/config/config.yaml")
+	config := config.NewConfig("./config/config.yaml")
 	service := service.NewURLService(config)
 	handler := api.NewURLHandler(service)
 
@@ -20,5 +20,4 @@ func InitServer() Server {
 		Service: service,
 		Handler: handler,
 	}
-
 }
