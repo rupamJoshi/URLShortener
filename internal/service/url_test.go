@@ -20,7 +20,10 @@ func Test_generateRandomString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := generateRandomString()
+			got, err := generateRandomString(&config.Config{ShortURLConf: config.ShortURLConf{
+				Length:  6,
+				Charset: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+			}})
 			if (err != nil) != tt.wantErr {
 				t.Errorf("generateRandomString() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -86,7 +89,7 @@ func TestURLShortenerService_ResolveOrignalURL(t *testing.T) {
 	type args struct {
 		shortURL string
 	}
-	shortURLMap["foo"] = ShortURL{
+	shortURLMap["foo"] = &ShortURL{
 		OrignalURL: "bar",
 	}
 	tests := []struct {

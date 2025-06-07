@@ -16,3 +16,7 @@ type GetOrignalURLRequest struct {
 type GetOrignalURLResponse struct {
 	OrignalURL string
 }
+
+type ShortURLAnalytics struct {
+	Count int
+}

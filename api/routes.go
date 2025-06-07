@@ -7,4 +7,5 @@ import (
 func SetupRoutes(router *gin.Engine, handler URLHandler) {
 	router.POST("/shorten", handler.GetShortenedURL)
 	router.GET("/:shortURL", handler.GetOrignalURL)
+	router.GET("/count/:shortURL", handler.GetAnalytics)
 }

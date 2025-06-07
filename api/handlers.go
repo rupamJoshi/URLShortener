@@ -14,6 +14,7 @@ type Handler struct {
 type URLHandler interface {
 	GetShortenedURL(c *gin.Context)
 	GetOrignalURL(c *gin.Context)
+	GetAnalytics(c *gin.Context)
 }
 
 func (h *Handler) GetShortenedURL(c *gin.Context) {
@@ -44,6 +45,16 @@ func (h *Handler) GetOrignalURL(c *gin.Context) {
 	fmt.Println(orignalURL)
 	c.Redirect(302, orignalURL)
 
+}
+
+func (h *Handler) GetAnalytics(c *gin.Context) {
+	count, err := h.urlService.Analytics(c.Param("shortURL"))
+	if err != nil {
+		return
+	}
+	c.JSON(200, &ShortURLAnalytics{
+		Count: count,
+	})
 }
 
 func NewURLHandler(service service.URLShortener) URLHandler {

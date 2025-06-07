@@ -1,3 +1,7 @@
+
 host: localhost
 port: 8080
 schema: http
+short_url:
+  length: 6
+  charset: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
