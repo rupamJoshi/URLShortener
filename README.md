@@ -16,12 +16,10 @@ This project is just for learning prupose, It is a basic implementation of a url
 
    outputs: 
    <pre>
-   {
+    {
     "https://www.udemy.com": 3,
     "https://www.youtube.com/": 3
-   }
-   
-   </pre>
+    }</pre>
 
 ## Docker Build 
 
