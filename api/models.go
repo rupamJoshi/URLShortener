@@ -18,5 +18,6 @@ type GetOrignalURLResponse struct {
 }
 
 type ShortURLAnalytics struct {
-	Count int
+	OrignalURL string
+	Count      int
 }

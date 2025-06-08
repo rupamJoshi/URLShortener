@@ -19,7 +19,7 @@ type URLShortenerService struct {
 type URLShortener interface {
 	Shorten(orignalURL string) (string, error)
 	ResolveOrignalURL(shortURL string) (string, error)
-	Analytics(shortURL string) (int, error)
+	Analytics(shortURL string) (map[string]int, error)
 }
 
 func generateRandomString(cfg *config.Config) (string, error) {
@@ -74,14 +74,14 @@ func (u *URLShortenerService) ResolveOrignalURL(shortURL string) (string, error)
 	return orignalURL, nil
 }
 
-func (u *URLShortenerService) Analytics(shortURL string) (int, error) {
+func (u *URLShortenerService) Analytics(shortURL string) (map[string]int, error) {
 
-	s := shortURLMap[shortURL]
-	if s == nil {
-		return 0, nil
+	m := make(map[string]int)
+	for _, value := range shortURLMap {
+		m[value.OrignalURL] = value.ResolveCount
 	}
 
-	return s.ResolveCount, nil
+	return m, nil
 
 }
 

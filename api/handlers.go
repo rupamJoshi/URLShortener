@@ -48,13 +48,12 @@ func (h *Handler) GetOrignalURL(c *gin.Context) {
 }
 
 func (h *Handler) GetAnalytics(c *gin.Context) {
-	count, err := h.urlService.Analytics(c.Param("shortURL"))
+	m, err := h.urlService.Analytics(c.Param("shortURL"))
 	if err != nil {
 		return
 	}
-	c.JSON(200, &ShortURLAnalytics{
-		Count: count,
-	})
+
+	c.JSON(200, m)
 }
 
 func NewURLHandler(service service.URLShortener) URLHandler {
