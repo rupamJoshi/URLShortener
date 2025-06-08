@@ -12,7 +12,16 @@ This project is just for learning prupose, It is a basic implementation of a url
 
 ### 3. Count of ShortURL: This API's Job is tell the count of how time, it is being used. 
     
-   <pre>curl -X GET  http://localhost:8080/count/2Lf3m5 </pre> 
+   <pre>curl -X GET  http://localhost:8080/count </pre> 
+
+   outputs: 
+   <pre>
+   {
+    "https://www.udemy.com": 3,
+    "https://www.youtube.com/": 3
+   }
+   
+   </pre>
 
 ## Docker Build 
 
