@@ -2,7 +2,7 @@
 
 This project is just for learning purpose, It is a basic implementation of a url shortener. Which consists of three basic APIs
 
-### 1. Create ShortURL : It create a Short URL of and given Long URL. It take one input as Orignal URL and returns a short URL. Here is Example:
+### 1. Create ShortURL : It create a short URL for a given long URL. It takes orignal URL as input and returns a short URL. Here is Example:
 
    <pre>  curl -H 'Content-Type: application/json'       -d '{ "orignal_url":"https://www.youtube.com/"}'       -X POST       http://localhost:8080/shorten </pre> 
 
