@@ -1,6 +1,6 @@
 # URL Shortener
 
-This project is just for learning prupose, It is a basic implementation of a url shortener. Which consists of Three basic APIs
+This project is just for learning purpose, It is a basic implementation of a url shortener. Which consists of three basic APIs
 
 ### 1. Create ShortURL : It create a Short URL of and given Long URL. It take one input as Orignal URL and returns a short URL. Here is Example:
 
@@ -10,7 +10,7 @@ This project is just for learning prupose, It is a basic implementation of a url
    
    <pre>http://localhost:8080/2Lf3m5</pre> 
 
-### 3. Count of ShortURL: This API's Job is tell the count of how time, it is being used. 
+### 3. Count of ShortURL: This API's Job is tell the count of how times a website has been access using a short.
     
    <pre>curl -X GET  http://localhost:8080/count </pre> 
 
